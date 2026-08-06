@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.a4b.recallops.dto.IncidentRequest;
 import com.a4b.recallops.dto.IncidentResponse;
+import com.a4b.recallops.dto.ResolveIncidentRequest;
 import com.a4b.recallops.enums.Status;
 import com.a4b.recallops.model.Incident;
 import com.a4b.recallops.service.IncidentService;
@@ -38,6 +40,9 @@ public class IncidentController {
         return ResponseEntity.ok(incidentService.getIncidentByStatus(status));
     }
 
-
+    @PatchMapping("/incidents/{id}/resolve")
+    public ResponseEntity<String> approveById(@PathVariable Long id,@RequestBody ResolveIncidentRequest request) throws Exception{
+        return ResponseEntity.ok(incidentService.resolvebyId(id,request));
+    }
 
 }

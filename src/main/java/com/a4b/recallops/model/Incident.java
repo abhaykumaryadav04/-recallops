@@ -16,8 +16,8 @@ import lombok.Builder;
 import lombok.Data;
 
 @Entity
-@Data
 @Builder
+@Data
 public class Incident {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

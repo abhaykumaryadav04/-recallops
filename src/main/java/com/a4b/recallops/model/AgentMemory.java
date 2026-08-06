@@ -27,6 +27,7 @@ public class AgentMemory {
    @JoinColumn(name = "incident_id")
    private Incident incident;
    private LocalDateTime createdAt;
+   private float[] embeded;
    @PrePersist
    private void createdAt(){
     createdAt=LocalDateTime.now();

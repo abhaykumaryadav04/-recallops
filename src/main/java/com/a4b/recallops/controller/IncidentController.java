@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.a4b.recallops.dto.AgentMemoryResponse;
@@ -57,5 +57,8 @@ public class IncidentController {
     public ResponseEntity<AgentMemoryResponse> getByIncidentId(@PathVariable Long id) throws Exception{
         return ResponseEntity.ok(agentMemoryService.getIncidentMemoryById(id));
     }
-
+    @GetMapping("/memories/search")
+    public ResponseEntity<List<AgentMemoryResponse>> getRelevantMemory(@RequestParam String keyword){
+        return ResponseEntity.ok(agentMemoryService.getRelevantMemory(keyword));
+    }
 }

@@ -48,5 +48,20 @@ public class AgentMemoryService {
 
 
     }
+    public List<AgentMemoryResponse> getRelevantMemory(String query){
+         List<AgentMemory> memories=agentMemoryRepo.findByProblemSummaryIgnoreCase(query);
+        List<AgentMemoryResponse> response=new ArrayList<>();
+        for(AgentMemory memory:memories){
+            AgentMemoryResponse r=AgentMemoryResponse.builder().createdAt(memory.getCreatedAt())
+                                                     .id(memory.getId())
+                                                     .incidentId(memory.getIncident().getId())
+                                                     .problemSummary(memory.getProblemSummary())
+                                                     .rootCause(memory.getRootCause())
+                                                     .solution(memory.getSolution())
+                                                     .build();
+        response.add(r);
+        }
+        return response;
+    }
 
 }

@@ -49,7 +49,7 @@ public class AgentMemoryService {
 
     }
     public List<AgentMemoryResponse> getRelevantMemory(String query){
-         List<AgentMemory> memories=agentMemoryRepo.findByProblemSummaryIgnoreCase(query);
+         List<AgentMemory> memories=agentMemoryRepo.findByProblemSummaryContainsIgnoreCase(query);
         List<AgentMemoryResponse> response=new ArrayList<>();
         for(AgentMemory memory:memories){
             AgentMemoryResponse r=AgentMemoryResponse.builder().createdAt(memory.getCreatedAt())

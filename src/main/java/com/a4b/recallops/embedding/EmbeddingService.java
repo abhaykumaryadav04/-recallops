@@ -3,6 +3,9 @@ package com.a4b.recallops.embedding;
 import org.springframework.stereotype.Service;
 
 @Service
-public class EmbeddingService {
+public interface EmbeddingService {
 
+
+    float[] generateEmbedding(String text);
+    
 }

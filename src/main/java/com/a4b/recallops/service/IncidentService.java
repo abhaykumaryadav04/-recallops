@@ -16,6 +16,7 @@ import com.a4b.recallops.model.AgentMemory;
 import com.a4b.recallops.model.Incident;
 import com.a4b.recallops.repo.AgentMemoryRepo;
 import com.a4b.recallops.repo.IncidentRepo;
+import com.a4b.recallops.vector.VectorMemoryService;
 
 import jakarta.transaction.Transactional;
 
@@ -26,6 +27,8 @@ public class IncidentService {
     private IncidentRepo incidentRepo;
     @Autowired
     private AgentMemoryRepo agentMemoryRepo;
+    @Autowired
+    private VectorMemoryService vectorMemoryService;
 
     public String  createIncident(IncidentRequest request) {
       Incident incident=Incident.builder().description(request.getDescreption())
@@ -69,7 +72,9 @@ public class IncidentService {
                                   .problemSummary(request.getProblemSummary())
                                   .build();
     agentMemoryRepo.save(memory);
-    return "Successfully updated";   
+     vectorMemoryService.storeMemory(memory); 
+    return "Successfully updated";  
+   
 }
 
 }

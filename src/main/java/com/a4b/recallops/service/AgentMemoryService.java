@@ -71,7 +71,7 @@ public class AgentMemoryService {
      List<Document> documents=vectorMemoryService.similaritySearch(query);
      List<AgentMemoryResponse> responses=new ArrayList<>();
      for(Document document : documents){
-        Object memoryIdObject = document.getMetadata().get("memoryId");
+        Object memoryIdObject = document.getMetadata().get("MemoryId");
         Long memoryId = Long.valueOf(memoryIdObject.toString());
      AgentMemory memory=agentMemoryRepo.findById(memoryId).orElseThrow(()-> new Exception("No data found"));
      AgentMemoryResponse response=AgentMemoryResponse.builder().createdAt(memory.getCreatedAt())

@@ -61,4 +61,8 @@ public class IncidentController {
     public ResponseEntity<List<AgentMemoryResponse>> getRelevantMemory(@RequestParam String keyword){
         return ResponseEntity.ok(agentMemoryService.getRelevantMemory(keyword));
     }
+    @GetMapping("/memories/vector/search")
+    public ResponseEntity<List<AgentMemoryResponse>> getSimetricSearch(@RequestParam String query) throws Exception{
+        return ResponseEntity.ok(agentMemoryService.getReleventMemories(query));
+    }
 }

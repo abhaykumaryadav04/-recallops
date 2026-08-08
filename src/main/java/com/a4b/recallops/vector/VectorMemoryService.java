@@ -1,11 +1,12 @@
 package com.a4b.recallops.vector;
 
 import org.springframework.ai.document.Document;
+import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
-import com.a4b.recallops.embedding.OpenAiEmbeddingService;
+
 import com.a4b.recallops.model.AgentMemory;
 
 import java.util.HashMap;
@@ -14,8 +15,7 @@ import java.util.Map;
 
 @Service
 public class VectorMemoryService {
- @Autowired
- private OpenAiEmbeddingService embeddingService;
+ 
 private final VectorStore vectorStore;
 
 public VectorMemoryService(VectorStore vectorStore) {
@@ -30,4 +30,9 @@ public VectorMemoryService(VectorStore vectorStore) {
     Document document=new Document(content,metaData );
     vectorStore.add(List.of(document));
  }
+ public List<Document> similaritySearch(String query){
+    SearchRequest request=SearchRequest.builder().query(query).topK(5).similarityThreshold(0.77).build();
+    return vectorStore.similaritySearch(request);
+ }
+
 }
